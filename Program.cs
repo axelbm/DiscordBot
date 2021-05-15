@@ -8,23 +8,28 @@ namespace MyFirstBot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Test 5");
+            Console.WriteLine();
 
             MainAsync().GetAwaiter().GetResult();
         }
 
         static async Task MainAsync()
         {
+            var token = Environment.GetEnvironmentVariable("DISCORD_TOKEN");
+
+            // Console.WriteLine("test 3");
+
+
             var discord = new DiscordClient(new DiscordConfiguration()
             {
-                Token = "ODQzMTA4MjYxOTk3OTY5NDE5.YJ_DwQ.sQpXS2nfc_PzNSJrgIeJG9ZtCOY",
+                Token = token,
                 TokenType = TokenType.Bot
             });
 
             discord.MessageCreated += async (s, e) =>
             {
                 if (e.Message.Content.ToLower().StartsWith("ping"))
-                    await e.Message.RespondAsync("pong! 5");
+                    await e.Message.RespondAsync("pong!");
 
             };
 
